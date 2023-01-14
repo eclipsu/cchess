@@ -4,12 +4,14 @@
 #include <ctype.h>
 
 int i, j;
+char move[2];
+
 void printGameBoard(char gameBoard[8][8]);
 char* drawPiece(char piece);
 
 int main(){
     SetConsoleOutputCP(65001);
-    printf("\n\n\t\t CHESS\n\n");
+    printf("\n\n\t\tCHESS\n\n");
     char gameBoard[8][8] = {{ 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r' },
                             { 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
                             { 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -21,17 +23,25 @@ int main(){
                         };
                     
     printGameBoard(gameBoard);
+    printf("Enter a move [W]: ");
+    scanf("%s", &move);
+    printf("\nOOPS! The chess board seems to be glued (._. )>, maybe come again next day to play..\nBYE~!");
     return 0;
 }
 
 void printGameBoard(char gameBoard[8][8]) {
     for(i = 0; i <= 7; i++) {
+        if(i == 0)
+            printf("\ta  b  c  d  e  f  g  h\n\n");
+
         printf("%d\t", (10 - i + -2));
         for(j = 0; j <= 7; j++) {
             if(gameBoard[i][j] == 0)
                 printf(".  ");
             else
                 printf("%s  ", drawPiece(gameBoard[i][j]));
+            if(j == 7)
+                printf("\t%d", (10 - i + -2));
         }
         if(i == 7)
             printf("\n\n \ta  b  c  d  e  f  g  h\n");
@@ -40,30 +50,30 @@ void printGameBoard(char gameBoard[8][8]) {
 }
 
 char* drawPiece(char piece) {
-    if(piece == 'p')
-        return "♟︎";
     if(piece == 'P')
+        return "♟︎";
+    if(piece == 'p')
         return "♙";
-    if(piece == 'K')
-        return "♔";
     if(piece == 'k')
+        return "♔";
+    if(piece == 'K')
         return "♚";
-    if(piece == 'Q')
-        return "♕";
     if(piece == 'q')
+        return "♕";
+    if(piece == 'Q')
         return "♛";
-    if(piece == 'R')
-        return "♖";
     if(piece == 'r')
+        return "♖";
+    if(piece == 'R')
         return "♜";
-    if(piece == 'B')
-        return "♗";
     if(piece == 'b')
+        return "♗";
+    if(piece == 'B')
         return "♝";
-    if(piece == 'N')
-        return "♘";
     if(piece == 'n')
+        return "♘";
+    if(piece == 'N')
         return "♞";
     else
-        return "A";
+        return "Failed";
 }
