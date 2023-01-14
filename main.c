@@ -2,9 +2,12 @@
 #include <stdio.h>
 #include <Windows.h>
 #include <ctype.h>
+#include <string.h>
+
 
 int i, j;
-char move[2];
+char move[4];
+size_t size;
 
 void printGameBoard(char gameBoard[8][8]);
 char* drawPiece(char piece);
@@ -21,11 +24,18 @@ int main(){
                             { 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P' },
                             { 'R', 'N', 'B','Q', 'K', 'B',  'N', 'R' },
                         };
-                    
+
     printGameBoard(gameBoard);
-    printf("Enter a move [W]: ");
-    scanf("%s", &move);
-    printf("\nOOPS! The chess board seems to be glued (._. )>, maybe come again next day to play..\nBYE~!");
+
+    while(1) {
+        askinput:
+            printf("Enter : ");
+            fgets(move, 25, stdin);
+            move[strlen(move) - 1] = '\0';
+            if(strlen(move) != 5)
+                goto askinput;
+            printf("Moved played: %s\n", move);
+    }
     return 0;
 }
 
